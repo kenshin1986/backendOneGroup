@@ -9,7 +9,7 @@ export default {
         },
         servers: [
             {
-                url: 'http://localhost:8080'
+                url: process.env.API || 'http://localhost:8080'
             }
         ]
     },
