@@ -39,7 +39,10 @@ export const signUp = async (req: any, res: Response, next: NextFunction) => {
                 const newUser = new UserModel(req.body)
                 const response: any = await newUser.save()
                 req.typeResponse = 200
-                req.json = { ...response._doc }
+                req.json = {
+                    currentUser: response._doc,
+                    token: createToken(response._doc)
+                }
             } else {
                 req.typeResponse = 400
                 req.message = "Usuario ya registrado"

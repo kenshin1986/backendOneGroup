@@ -70,6 +70,14 @@
  *                  description: error generado al consultar
  *          example:
  *              error: Error no found
+ *      ErrorAutentication:
+ *          type: object
+ *          properties:
+ *              error:
+ *                  type: string
+ *                  description: error de autenticación
+ *          example:
+ *              error: Unauthorized
  *      RequeryData:
  *          type: object
  *          properties:
@@ -99,12 +107,13 @@
  *          schema:
  *              type: string
  *          description: desde que paginación arranca
- *      sort:
- *          in: query
- *          name: $sort
+ *      authorization:
+ *          in: header
+ *          name: authorization
+ *          required: true
  *          schema:
  *              type: string
- *          description: ordenamiento de la busqueda
+ *          description: Token de autenticacion
  */
 
 //Routes
@@ -116,6 +125,7 @@
  *      summary: Obtiene lista de usuarios
  *      tags: [users]
  *      parameters:
+ *          - $ref: '#/components/parametersDefault/authorization'
  *          - $ref: '#/components/parametersDefault/limit'
  *          - $ref: '#/components/parametersDefault/skip'
  *      responses:
@@ -139,6 +149,12 @@
  *                                  type: array
  *                                  items:
  *                                      $ref: '#/components/schemas/UserSelect'
+ *          401:
+ *              description: Error de autenticación
+ *              content:
+ *                  aplication/json:
+ *                      schema:
+ *                              $ref: '#/components/schemas/ErrorAutentication'
  *          500:
  *              description: Error al intentar consultar
  *              content:
@@ -162,6 +178,53 @@
  *      responses:
  *          200:
  *              description: Creado correctamente
+ *              content:
+ *                  aplication/json:
+ *                      schema:
+ *                          type: object
+ *                          properties:
+ *                              currentUser:
+ *                                  $ref: '#/components/schemas/UserSelect'
+ *                              token:
+ *                                  type: string
+ *                                  example: 'das8d4824482343426$#%$#12543/24426542436'
+ *          400:
+ *              description: Error datos requeridos, o usuario ya existente
+ *              content:
+ *                  aplication/json:
+ *                      schema:
+ *                          $ref: '#/components/schemas/RequeryData'
+ *          500:
+ *              description: Error al intentar consultar
+ *              content:
+ *                  aplication/json:
+ *                      schema:
+ *                          $ref: '#/components/schemas/NoFound'
+ */
+
+/**
+ * @swagger
+ * /users/signin:
+ *  post:
+ *      summary: Validacion de login
+ *      tags: [users]
+ *      requestBody:
+ *          required: true
+ *          content:
+ *              application/json:
+ *                  schema:
+ *                      type: array
+ *                      properties:
+ *                          user:
+ *                              type: string
+ *                          password:
+ *                              type: string
+ *                      example:
+ *                          user: juanito
+ *                          password: password
+ *      responses:
+ *          200:
+ *              description: Ingreso  correcto
  *              content:
  *                  aplication/json:
  *                      schema:
@@ -232,7 +295,6 @@
  *                      schema:
  *                          $ref: '#/components/schemas/NoFound'
  */
-
 
 /**
  * @swagger
