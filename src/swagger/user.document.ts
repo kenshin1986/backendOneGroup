@@ -94,6 +94,13 @@
  *          schema:
  *              type: string
  *              description: id del usuario
+ *      authorization:
+ *          in: header
+ *          name: authorization
+ *          required: true
+ *          schema:
+ *              type: string
+ *          description: Token de autenticacion
  *  parametersDefault:
  *      limit:
  *          in: query
@@ -107,13 +114,7 @@
  *          schema:
  *              type: string
  *          description: desde que paginación arranca
- *      authorization:
- *          in: header
- *          name: authorization
- *          required: true
- *          schema:
- *              type: string
- *          description: Token de autenticacion
+ *
  */
 
 //Routes
@@ -125,7 +126,7 @@
  *      summary: Obtiene lista de usuarios
  *      tags: [users]
  *      parameters:
- *          - $ref: '#/components/parametersDefault/authorization'
+ *          - $ref: '#/components/parameters/authorization'
  *          - $ref: '#/components/parametersDefault/limit'
  *          - $ref: '#/components/parametersDefault/skip'
  *      responses:
@@ -256,13 +257,14 @@
  *      summary: Actualiza usuario
  *      tags: [users]
  *      parameters:
+ *          - $ref: '#/components/parameters/authorization'
  *          - $ref: '#/components/parameters/userId'
  *      requestBody:
  *          required: true
  *          content:
  *              application/json:
  *                  schema:
- *                      $ref: '#/components/schemas/User'
+ *                      $ref: '#/components/schemas/UserCreate'
  *      responses:
  *          200:
  *              description: Actualizado correctamente
@@ -288,6 +290,12 @@
  *                                  description: mensaje para mostrar al usuario
  *                          example:
  *                              message: Usuario no encontrado
+ *          401:
+ *              description: Error de autenticación
+ *              content:
+ *                  aplication/json:
+ *                      schema:
+ *                              $ref: '#/components/schemas/ErrorAutentication'
  *          500:
  *              description: Error al intentar consultar
  *              content:
@@ -303,6 +311,7 @@
  *      summary: Elimina usuario
  *      tags: [users]
  *      parameters:
+ *          - $ref: '#/components/parameters/authorization'
  *          - $ref: '#/components/parameters/userId'
  *      responses:
  *          200:
@@ -329,6 +338,12 @@
  *                                  description: mensaje para mostrar al usuario
  *                          example:
  *                              message: Usuario no encontrado
+ *          401:
+ *              description: Error de autenticación
+ *              content:
+ *                  aplication/json:
+ *                      schema:
+ *                              $ref: '#/components/schemas/ErrorAutentication'
  *          500:
  *              description: Error al intentar consultar
  *              content:
