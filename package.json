@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "mkdir /app/dist/public/images &&  node dist/index.js",
+    "start": "node dist/index.js",
     "dev": "tsc-watch --onSuccess \"node dist/index.js\" ",
     "build": "tsc -p .",
     "public": "mkdir 'public/images'"
