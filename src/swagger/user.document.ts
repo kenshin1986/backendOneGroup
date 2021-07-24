@@ -156,7 +156,7 @@
  * @swagger
  * /users:
  *  post:
- *      summary: Actualiza usuario
+ *      summary: Crea un usuario
  *      tags: [users]
  *      requestBody:
  *          required: true
