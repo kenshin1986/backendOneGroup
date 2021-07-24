@@ -41,4 +41,4 @@ npm start
 ## Autores ✒️
 
 
-* **José Luís Rodríguez Peñaranda** - *Trabajo Inicial* - [darklegion92](https://github.com/darklegion92)
+**José Luís Rodríguez Peñaranda** - *Trabajo Inicial* - [darklegion92](https://github.com/darklegion92)

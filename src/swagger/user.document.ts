@@ -3,7 +3,7 @@
  * @swagger
  * components:
  *  schemas:
- *      User:
+ *      UserSelect:
  *          type: object
  *          properties:
  *              _id:
@@ -15,9 +15,6 @@
  *              email:
  *                  type: string
  *                  description: correo del usuario
- *              password:
- *                  type: string
- *                  description: contraseña del usuario
  *              firstName:
  *                  type: string
  *                  description: nombres del usuario
@@ -34,11 +31,37 @@
  *              id: fsadf541561adf841wfd5s1
  *              user: Bret
  *              email: Sincere@april.biz
- *              password: 51586fs61fs
  *              firstName: Juanito
  *              lastName: Perez
  *              createdAt: 2021-07-23 06:57:08
  *              updatedAt: 2021-07-23 06:57:08
+ *      UserCreate:
+ *          type: object
+ *          properties:
+ *              user:
+ *                  type: string
+ *                  description: usuario
+ *                  required: true
+ *              email:
+ *                  type: string
+ *                  required: true
+ *                  description: correo del usuario
+ *              password:
+ *                  type: string
+ *                  required: true
+ *                  description: contraseña del usuario
+ *              firstName:
+ *                  type: string
+ *                  description: nombres del usuario
+ *              lastName:
+ *                  type: string
+ *                  description: apellidos del usuario
+ *          example:
+ *              user: Bret
+ *              email: Sincere@april.biz
+ *              password: 51586fs61fs
+ *              firstName: Juanito
+ *              lastName: Perez
  *      NoFound:
  *          type: object
  *          properties:
@@ -47,6 +70,14 @@
  *                  description: error generado al consultar
  *          example:
  *              error: Error no found
+ *      RequeryData:
+ *          type: object
+ *          properties:
+ *              message:
+ *                  type: string
+ *                  description: Faltan datos requeridos
+ *          example:
+ *              message: Faltan datos requeridos
  *  parameters:
  *      userId:
  *          in: path
@@ -87,22 +118,72 @@
  *      parameters:
  *          - $ref: '#/components/parametersDefault/limit'
  *          - $ref: '#/components/parametersDefault/skip'
- *          - $ref: '#/components/parametersDefault/sort'
  *      responses:
  *          200:
  *              description: Lista de usuarios
  *              content:
  *                  aplication/json:
  *                      schema:
- *                          type: array
- *                          items:
- *                              $ref: '#/components/schemas/User'
+ *                          type: object
+ *                          properties:
+ *                              total:
+ *                                  type: number
+ *                                  example: 1
+ *                              limit:
+ *                                  type: number
+ *                                  example: 10
+ *                              skip:
+ *                                  type: number
+ *                                  example: 0
+ *                              data:
+ *                                  type: array
+ *                                  items:
+ *                                      $ref: '#/components/schemas/UserSelect'
  *          500:
  *              description: Error al intentar consultar
  *              content:
  *                  aplication/json:
  *                      schema:
  *                              $ref: '#/components/schemas/NoFound'
+ */
+
+/**
+ * @swagger
+ * /users/signup:
+ *  post:
+ *      summary: Crea un usuario
+ *      tags: [users]
+ *      requestBody:
+ *          required: true
+ *          content:
+ *              application/json:
+ *                  schema:
+ *                      $ref: '#/components/schemas/UserCreate'
+ *      responses:
+ *          200:
+ *              description: Creado correctamente
+ *              content:
+ *                  aplication/json:
+ *                      schema:
+ *                          type: object
+ *                          properties:
+ *                              currentUser:
+ *                                  $ref: '#/components/schemas/UserSelect'
+ *                              token:
+ *                                  type: string
+ *                                  example: 'das8d4824482343426$#%$#12543/24426542436'
+ *          400:
+ *              description: Error datos requeridos, o usuario ya existente
+ *              content:
+ *                  aplication/json:
+ *                      schema:
+ *                          $ref: '#/components/schemas/RequeryData'
+ *          500:
+ *              description: Error al intentar consultar
+ *              content:
+ *                  aplication/json:
+ *                      schema:
+ *                          $ref: '#/components/schemas/NoFound'
  */
 
 /**
@@ -152,32 +233,6 @@
  *                          $ref: '#/components/schemas/NoFound'
  */
 
-/**
- * @swagger
- * /users:
- *  post:
- *      summary: Crea un usuario
- *      tags: [users]
- *      requestBody:
- *          required: true
- *          content:
- *              application/json:
- *                  schema:
- *                      $ref: '#/components/schemas/User'
- *      responses:
- *          200:
- *              description: Creado correctamente
- *              content:
- *                  aplication/json:
- *                      schema:
- *                          $ref: '#/components/schemas/User'
- *          500:
- *              description: Error al intentar consultar
- *              content:
- *                  aplication/json:
- *                      schema:
- *                          $ref: '#/components/schemas/NoFound'
- */
 
 /**
  * @swagger

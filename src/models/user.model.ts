@@ -7,6 +7,7 @@ export interface IUser extends Document {
     user: string;
     firstName: string;
     lastName: string;
+    comparePassword: (password: string) => Promise<boolean>;
 }
 
 const userSchema = new Schema({
@@ -20,6 +21,7 @@ const userSchema = new Schema({
     password: {
         type: String,
         required: true,
+        select: false,
     },
     user: {
         type: String,

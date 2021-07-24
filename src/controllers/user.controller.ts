@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from 'express'
 import UserModel, { IUser } from '../models/user.model'
+import { createToken } from '../services/jwt'
 
 export interface RequestNext extends Request {
     message: string,
@@ -9,11 +10,11 @@ export interface RequestNext extends Request {
 }
 
 export const getUsers = async (req: any, res: Response, next: NextFunction) => {
-    const { $limit, $sort, $skip } = req.query
+    const { $limit, $skip } = req.query
     const limit = parseInt($limit) || 10
     const skip = parseInt($skip) || 0
     try {
-        const users = await UserModel.find().limit(limit).skip(skip).sort($sort);
+        const users = await UserModel.find().limit(limit).skip(skip);
 
         req.typeResponse = 200
         req.json = {
@@ -29,18 +30,57 @@ export const getUsers = async (req: any, res: Response, next: NextFunction) => {
     next()
 }
 
-export const postUser = async (req: any, res: Response, next: NextFunction) => {
+export const signUp = async (req: any, res: Response, next: NextFunction) => {
+    const { email, password, user } = req.body
     try {
-        const newUser = new UserModel(req.body)
+        if (email && password && user) {
+            const userSelect = await UserModel.findOne({ $or: [{ user }, { email }] })
+            if (!userSelect) {
+                const newUser = new UserModel(req.body)
+                const response: any = await newUser.save()
+                req.typeResponse = 200
+                req.json = { ...response._doc }
+            } else {
+                req.typeResponse = 400
+                req.message = "Usuario ya registrado"
+            }
+        } else {
+            req.typeResponse = 400
+            req.message = "Los datos email, user y password son obligatorios"
+        }
 
-        const response: any = await newUser.save()
-        req.typeResponse = 200
-        req.json = { ...response._doc }
     } catch (error) {
         req.typeResponse = 500
         req.error = error
     }
     next()
+}
+
+export const signIn = async (req: any, res: Response, next: NextFunction) => {
+    const { user, password } = req.body
+    try {
+        if (user && password) {
+            const userSelect = await UserModel.findOne({ $or: [{ user }, { email: user }] })
+            const isMatch = await userSelect?.comparePassword(password)
+            if (userSelect && isMatch) {
+                req.json = {
+                    currentUser: userSelect,
+                    token: createToken(userSelect)
+                }
+            } else {
+                req.typeResponse = 400
+                req.message = "Usuario o contraseña incorrectos"
+            }
+        } else {
+            req.typeResponse = 400
+            req.message = "Los datos user y password son obligatorios"
+        }
+    } catch (error) {
+        req.typeResponse = 500
+        req.error = error
+    }
+    next()
+
 }
 
 
