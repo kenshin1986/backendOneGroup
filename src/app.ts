@@ -2,8 +2,9 @@ import express from 'express'
 import morgan from 'morgan'
 import cors from 'cors'
 import passport from 'passport'
-import passportMiddleware from './middlewares/passport.middleware'
+import path from 'path'
 
+import passportMiddleware from './middlewares/passport.middleware'
 import userRouter from './routes/user.routes'
 import logRouter from './routes/log.routes'
 import productRouter from './routes/product.routes'
@@ -26,7 +27,7 @@ app.use(morgan('dev'))
 app.use(cors())
 app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerDocs))
 app.use(express.urlencoded({ extended: false }))
-app.use(express.static(`${__dirname}/public`));
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json())
 app.use(passport.initialize())
 passport.use(passportMiddleware)
