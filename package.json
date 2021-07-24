@@ -7,7 +7,7 @@
     "start": "node dist/index.js",
     "dev": "tsc-watch --onSuccess \"node dist/index.js\" ",
     "build": "tsc && npm run public",
-    "public": "cp 'src/public/**' 'dist/public'"
+    "public": "mkdir 'src/public/images'"
   },
   "keywords": [],
   "author": "",
