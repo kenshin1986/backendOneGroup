@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "mkdir dist/public/ && node dist/index.js",
+    "start": "mkdir  dist/public/images && node dist/index.js",
     "dev": "tsc-watch --onSuccess \"node dist/index.js\" ",
-    "build": "tsc -p .",
-    "public": "mkdir 'public/images'"
+    "build": "tsc -p . && mkdir -p 'dist/public/images'",
+    "public": "mkdir -p 'dist/public/images'"
   },
   "keywords": [],
   "author": "",
