@@ -1,6 +1,6 @@
 import { Router } from 'express'
 import passport from 'passport'
-import { deleteUser, getUsers, patchUser, signIn, signUp } from '../controllers/user.controller'
+import { getUsers, patchUser, signIn, signUp } from '../controllers/user.controller'
 
 const router = Router()
 
@@ -14,6 +14,5 @@ router
     .post('/signup', signUp)
     .post('/', signIn)
 
-router.delete('/:id', passport.authenticate('jwt', { session: false }), deleteUser)
 
 export default router

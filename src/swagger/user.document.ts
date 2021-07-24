@@ -2,6 +2,11 @@
 /**
  * @swagger
  * components:
+ *  securitySchemes:
+ *      BearerAuth:
+ *          type: http
+ *          scheme: bearer
+ *          bearerFormat: JWT
  *  schemas:
  *      UserSelect:
  *          type: object
@@ -94,13 +99,6 @@
  *          schema:
  *              type: string
  *              description: id del usuario
- *      authorization:
- *          in: header
- *          name: authorization
- *          required: true
- *          schema:
- *              type: string
- *          description: Token de autenticacion
  *  parametersDefault:
  *      limit:
  *          in: query
@@ -123,10 +121,11 @@
  * @swagger
  * /users:
  *  get:
+ *      security:
+ *          - bearerAuth: []
  *      summary: Obtiene lista de usuarios
  *      tags: [users]
  *      parameters:
- *          - $ref: '#/components/parameters/authorization'
  *          - $ref: '#/components/parametersDefault/limit'
  *          - $ref: '#/components/parametersDefault/skip'
  *      responses:
@@ -254,10 +253,11 @@
  * @swagger
  * /users/{id}:
  *  patch:
+ *      security:
+ *          - bearerAuth: []
  *      summary: Actualiza usuario
  *      tags: [users]
  *      parameters:
- *          - $ref: '#/components/parameters/authorization'
  *          - $ref: '#/components/parameters/userId'
  *      requestBody:
  *          required: true
@@ -278,54 +278,6 @@
  *                                  description: mensaje para mostar al usuario
  *                          example:
  *                              message: Usuario actualizado correctamente
- *          400:
- *              description: Usuario no encontrado
- *              content:
- *                  aplication/json:
- *                      schema:
- *                          type: object
- *                          properties:
- *                              message:
- *                                  type: string
- *                                  description: mensaje para mostrar al usuario
- *                          example:
- *                              message: Usuario no encontrado
- *          401:
- *              description: Error de autenticación
- *              content:
- *                  aplication/json:
- *                      schema:
- *                              $ref: '#/components/schemas/ErrorAutentication'
- *          500:
- *              description: Error al intentar consultar
- *              content:
- *                  aplication/json:
- *                      schema:
- *                          $ref: '#/components/schemas/NoFound'
- */
-
-/**
- * @swagger
- * /users/{id}:
- *  delete:
- *      summary: Elimina usuario
- *      tags: [users]
- *      parameters:
- *          - $ref: '#/components/parameters/authorization'
- *          - $ref: '#/components/parameters/userId'
- *      responses:
- *          200:
- *              description: Eliminado correctamente
- *              content:
- *                  aplication/json:
- *                      schema:
- *                          type: object
- *                          properties:
- *                              message:
- *                                  type: string
- *                                  description: mensaje para mostar al usuario
- *                          example:
- *                              message: Usuario eliminado correctamente
  *          400:
  *              description: Usuario no encontrado
  *              content:

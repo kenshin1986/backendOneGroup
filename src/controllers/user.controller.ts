@@ -49,7 +49,7 @@ export const signUp = async (req: any, res: Response, next: NextFunction) => {
             }
         } else {
             req.typeResponse = 400
-            req.message = "Los datos email, user y password son obligatorios"
+            req.message = "Los parámetros email, user y password son obligatorios"
         }
 
     } catch (error) {
@@ -66,6 +66,7 @@ export const signIn = async (req: any, res: Response, next: NextFunction) => {
             const userSelect = await UserModel.findOne({ $or: [{ user }, { email: user }] })
             const isMatch = await userSelect?.comparePassword(password)
             if (userSelect && isMatch) {
+                req.typeResponse = 200
                 req.json = {
                     currentUser: userSelect,
                     token: createToken(userSelect)
@@ -76,7 +77,7 @@ export const signIn = async (req: any, res: Response, next: NextFunction) => {
             }
         } else {
             req.typeResponse = 400
-            req.message = "Los datos user y password son obligatorios"
+            req.message = "Los parámetros user y password son obligatorios"
         }
     } catch (error) {
         req.typeResponse = 500
@@ -90,25 +91,14 @@ export const signIn = async (req: any, res: Response, next: NextFunction) => {
 export const patchUser = async (req: any, res: Response, next: NextFunction) => {
     const { id } = req.params
     try {
-
-        await UserModel.updateOne(id, req.body)
-        req.typeResponse = 200
-        req.message = 'Usuario actualizado correctamente'
-
-    } catch (error) {
-        req.typeResponse = 500
-        req.error = error
-    }
-    next()
-}
-
-export const deleteUser = async (req: any, res: Response, next: NextFunction) => {
-    const { id } = req.params
-    try {
-
-        await UserModel.deleteOne(id)
-        req.typeResponse = 200
-        req.message = 'Usuario eliminado correctamente'
+        if (id) {
+            await UserModel.updateOne(id, req.body)
+            req.typeResponse = 200
+            req.message = 'Usuario actualizado correctamente'
+        } else {
+            req.typeResponse = 400
+            req.message = "El parámetro id es obligatorio"
+        }
 
     } catch (error) {
         req.typeResponse = 500

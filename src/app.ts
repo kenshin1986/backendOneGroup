@@ -6,6 +6,7 @@ import passportMiddleware from './middlewares/passport.middleware'
 
 import userRouter from './routes/user.routes'
 import logRouter from './routes/log.routes'
+import productRouter from './routes/product.routes'
 import { saveLogs } from './middlewares/log.middleware'
 import swaggerOptions from './config/swagger.config'
 
@@ -30,6 +31,7 @@ passport.use(passportMiddleware)
 
 //routes
 app.use('/users', userRouter, saveLogs)
-app.use('/logs', passport.authenticate('jwt', { session: false }),logRouter)
+app.use('/logs', passport.authenticate('jwt', { session: false }), logRouter)
+app.use('/products', passport.authenticate('jwt', { session: false }), productRouter)
 
 export default app;
