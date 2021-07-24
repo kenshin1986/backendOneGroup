@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node dist/index.js",
     "dev": "tsc-watch --onSuccess \"node dist/index.js\" ",
-    "build": "tsc && npm run public",
+    "build": "tsc -p .",
     "public": "mkdir 'public/images'"
   },
   "keywords": [],
