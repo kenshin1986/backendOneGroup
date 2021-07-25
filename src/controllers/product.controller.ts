@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express'
-import ProductModel, { IProduct } from '../models/product.model'
+import ProductModel from '../models/product.model'
 
 export interface RequestNext extends Request {
     message: string,
@@ -9,11 +9,11 @@ export interface RequestNext extends Request {
 }
 
 export const getProducts = async (req: any, res: Response, next: NextFunction) => {
-    const { $limit, $skip } = req.query
+    const { $limit, $skip, name } = req.query
     const limit = parseInt($limit) || 10
     const skip = parseInt($skip) || 0
     try {
-        const products = await ProductModel.find().limit(limit).skip(skip);
+        const products = await ProductModel.find({ name: { $regex: `.*${name}.*` } }).limit(limit).skip(skip);
 
         req.typeResponse = 200
         req.json = {
@@ -73,26 +73,6 @@ export const getProductId = async (req: any, res: Response, next: NextFunction) 
         } else {
             req.typeResponse = 400
             req.message = "El parámetro id es obligatorio"
-        }
-    } catch (error) {
-        req.typeResponse = 500
-        req.error = error
-    }
-    next()
-
-}
-
-export const getProductsLike = async (req: any, res: Response, next: NextFunction) => {
-    const { name } = req.params
-    try {
-        if (name) {
-            const productSelected = await ProductModel.find({ name: { $regex: `.*${name}.*` } })
-            req.typeResponse = 200
-            req.json = productSelected
-
-        } else {
-            req.typeResponse = 400
-            req.message = "El parámetro name es obligatorio"
         }
     } catch (error) {
         req.typeResponse = 500

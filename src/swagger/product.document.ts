@@ -71,14 +71,13 @@
  *          required: true
  *          schema:
  *              type: string
- *              description: id del producto
+ *          description: id del producto
  *      productName:
  *          in: path
  *          name: name
- *          required: true
  *          schema:
  *              type: string
- *              description: comodín para la busqueda del producto por name
+ *          description: comodín para la busqueda del producto por name
  *
  */
 
@@ -95,6 +94,7 @@
  *      parameters:
  *          - $ref: '#/components/parametersDefault/limit'
  *          - $ref: '#/components/parametersDefault/skip'
+ *          - $ref: '#/components/parameters/productName'
  *      responses:
  *          200:
  *              description: Lista de productos
@@ -140,37 +140,6 @@
  *      tags: [products]
  *      parameters:
  *          - $ref: '#/components/parameters/productId'
- *      responses:
- *          200:
- *              description: Ingreso  correcto
- *              content:
- *                  aplication/json:
- *                      schema:
- *                          $ref: '#/components/schemas/UserSelect'
- *          400:
- *              description: Producto no encontrado
- *              content:
- *                  aplication/json:
- *                      schema:
- *                          $ref: '#/components/schemas/RequeryData'
- *          500:
- *              description: Error al intentar consultar
- *              content:
- *                  aplication/json:
- *                      schema:
- *                          $ref: '#/components/schemas/NoFound'
- */
-
-/**
- * @swagger
- * /products/like/{name}:
- *  get:
- *      security:
- *          - bearerAuth: []
- *      summary: Consulta producto por comodín name
- *      tags: [products]
- *      parameters:
- *          - $ref: '#/components/parameters/productName'
  *      responses:
  *          200:
  *              description: Ingreso  correcto
