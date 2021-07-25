@@ -61,10 +61,10 @@ export const signUp = async (req: any, res: Response, next: NextFunction) => {
 
 export const signIn = async (req: any, res: Response, next: NextFunction) => {
     console.log("que paso way");
-    const { user, password } = req.body    
+    const { email, password } = req.body
     try {
-        if (user && password) {
-            const userSelect = await UserModel.findOne({ $or: [{ user }, { email: user }] })
+        if (email && password) {
+            const userSelect = await UserModel.findOne({ email })
             const isMatch = await userSelect?.comparePassword(password)
             if (userSelect && isMatch) {
                 req.typeResponse = 200

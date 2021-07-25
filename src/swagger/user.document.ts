@@ -215,12 +215,12 @@
  *                  schema:
  *                      type: array
  *                      properties:
- *                          user:
+ *                          email:
  *                              type: string
  *                          password:
  *                              type: string
  *                      example:
- *                          user: juanito
+ *                          email: juanito@dominio.com
  *                          password: password
  *      responses:
  *          200:
