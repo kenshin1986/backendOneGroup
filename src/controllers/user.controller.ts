@@ -9,7 +9,7 @@ export interface RequestNext extends Request {
     typeResponse: number,
 }
 export const getCurrentUser = async (req: any, res: Response, next: NextFunction) => {
-
+    delete req.user._doc.password
     req.typeResponse = 200
     req.json = req.user._doc
     next()

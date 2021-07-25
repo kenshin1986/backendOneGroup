@@ -36,9 +36,16 @@ export const postProduct = async (req: any, res: Response, next: NextFunction) =
             const productSelected = await ProductModel.findOne({ name })
             if (!productSelected) {
                 const newProduct = new ProductModel(req.body)
-                const response: any = await newProduct.save()
+                await newProduct.save()
+                const products = await ProductModel.find().limit(10).skip(0);
+
                 req.typeResponse = 200
-                req.json = response._doc
+                req.json = {
+                    limit: 10,
+                    skip: 0,
+                    total: (await ProductModel.find()).length,
+                    data: products,
+                }
             } else {
                 req.typeResponse = 400
                 req.message = "Producto ya registrado"

@@ -196,8 +196,22 @@
  *          required: true
  *          content:
  *              application/json:
- *                  schema:
- *                      $ref: '#/components/schemas/ProductCreate'
+ *                      schema:
+ *                          type: object
+ *                          properties:
+ *                              total:
+ *                                  type: number
+ *                                  example: 1
+ *                              limit:
+ *                                  type: number
+ *                                  example: 10
+ *                              skip:
+ *                                  type: number
+ *                                  example: 0
+ *                              data:
+ *                                  type: array
+ *                                  items:
+ *                                      $ref: '#/components/schemas/ProductSelect'
  *      responses:
  *          200:
  *              description: Creado correctamente
