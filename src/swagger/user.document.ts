@@ -156,6 +156,35 @@
 
 /**
  * @swagger
+ * /users/current:
+ *  get:
+ *      security:
+ *          - bearerAuth: []
+ *      summary: Obtiene usuario del token
+ *      tags: [users]
+ *      responses:
+ *          200:
+ *              description: Usuario
+ *              content:
+ *                  aplication/json:
+ *                      schema:
+ *                          $ref: '#/components/schemas/UserSelect'
+ *          401:
+ *              description: Error de autenticación
+ *              content:
+ *                  aplication/json:
+ *                      schema:
+ *                              $ref: '#/components/schemas/ErrorAutentication'
+ *          500:
+ *              description: Error al intentar consultar
+ *              content:
+ *                  aplication/json:
+ *                      schema:
+ *                              $ref: '#/components/schemas/NoFound'
+ */
+
+/**
+ * @swagger
  * /users/signup:
  *  post:
  *      summary: Crea un usuario

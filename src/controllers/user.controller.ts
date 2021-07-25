@@ -8,6 +8,12 @@ export interface RequestNext extends Request {
     json: any,
     typeResponse: number,
 }
+export const getCurrentUser = async (req: any, res: Response, next: NextFunction) => {
+
+    req.typeResponse = 200
+    req.json = req.user._doc
+    next()
+}
 
 export const getUsers = async (req: any, res: Response, next: NextFunction) => {
     const { $limit, $skip } = req.query
@@ -31,10 +37,10 @@ export const getUsers = async (req: any, res: Response, next: NextFunction) => {
 }
 
 export const signUp = async (req: any, res: Response, next: NextFunction) => {
-    const { email, password, user } = req.body
+    const { email, password } = req.body
     try {
-        if (email && password && user) {
-            const userSelect = await UserModel.findOne({ $or: [{ user }, { email }] })
+        if (email && password) {
+            const userSelect = await UserModel.findOne({ email })
             if (!userSelect) {
                 const newUser = new UserModel(req.body)
                 const response: any = await newUser.save()
@@ -50,7 +56,7 @@ export const signUp = async (req: any, res: Response, next: NextFunction) => {
             }
         } else {
             req.typeResponse = 400
-            req.message = "Los parámetros email, user y password son obligatorios"
+            req.message = "Los parámetros email y password son obligatorios"
         }
 
     } catch (error) {
