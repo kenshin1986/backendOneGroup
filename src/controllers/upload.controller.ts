@@ -10,6 +10,7 @@ export interface RequestNext extends Request {
 
 export const uploadImage = async (req: any, res: Response, next: NextFunction) => {
     const { file } = req
+
     try {
         if (file) {
             req.typeResponse = 200
@@ -25,11 +26,8 @@ export const uploadImage = async (req: any, res: Response, next: NextFunction) =
     } catch (error) {
         console.log(error);
 
-        req.typeResponse = 400
+        req.typeResponse = 500
         req.message = 'Error, formato no compatible'
     }
-
-
-    /*
-    */
+    next()
 }

@@ -36,6 +36,6 @@ passport.use(passportMiddleware)
 app.use('/users', userRouter, saveLogs)
 app.use('/logs', passport.authenticate('jwt', { session: false }), logRouter)
 app.use('/products', passport.authenticate('jwt', { session: false }), productRouter, saveLogs)
-app.use('/upload', uploadRouter)
+app.use('/upload', uploadRouter, saveLogs)
 
 export default app;
