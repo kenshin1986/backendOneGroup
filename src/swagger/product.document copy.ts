@@ -196,6 +196,13 @@
  *          required: true
  *          content:
  *              application/json:
+ *                  schema:
+ *                      $ref: '#/components/schemas/ProductCreate'
+ *      responses:
+ *          200:
+ *              description: Creado correctamente
+ *              content:
+ *                  aplication/json:
  *                      schema:
  *                          type: object
  *                          properties:
@@ -212,13 +219,6 @@
  *                                  type: array
  *                                  items:
  *                                      $ref: '#/components/schemas/ProductSelect'
- *      responses:
- *          200:
- *              description: Creado correctamente
- *              content:
- *                  aplication/json:
- *                      schema:
- *                          $ref: '#/components/schemas/ProductSelect'
  *          400:
  *              description: Error datos requeridos, o producto ya existente
  *              content:
