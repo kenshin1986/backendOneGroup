@@ -60,7 +60,8 @@ export const signUp = async (req: any, res: Response, next: NextFunction) => {
 }
 
 export const signIn = async (req: any, res: Response, next: NextFunction) => {
-    const { user, password } = req.body
+    console.log("que paso way");
+    const { user, password } = req.body    
     try {
         if (user && password) {
             const userSelect = await UserModel.findOne({ $or: [{ user }, { email: user }] })

@@ -4,7 +4,6 @@ import { getUsers, patchUser, signIn, signUp } from '../controllers/user.control
 
 const router = Router()
 
-
 router
     .get('/', passport.authenticate('jwt', { session: false }), getUsers)
 
@@ -12,7 +11,7 @@ router.patch('/:id', passport.authenticate('jwt', { session: false }), patchUser
 
 router
     .post('/signup', signUp)
-    .post('/', signIn)
+    .post('/signin', signIn)
 
 
 export default router

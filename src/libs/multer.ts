@@ -1,6 +1,5 @@
-import multer, { StorageEngine } from 'multer'
-import path from 'path'
-
+import { Response } from 'express'
+import multer, { StorageEngine, FileFilterCallback, } from 'multer'
 
 const storage: StorageEngine = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -10,8 +9,10 @@ const storage: StorageEngine = multer.diskStorage({
         cb(null, `${Date.now()}-${file.originalname}`)
     }
 })
-const upload = multer({ storage })
+
+
+const uploadImage = multer({ storage })
 
 
 
-export default upload
+export default uploadImage
