@@ -12,6 +12,9 @@
  *              name:
  *                  type: string
  *                  description: nombre del producto
+ *              description:
+ *                  type: string
+ *                  description: descripción del producto
  *              price:
  *                  type: number
  *                  description: precio del producto
@@ -30,6 +33,7 @@
  *          example:
  *              id: fsadf541561adf841wfd5s1
  *              name: Vaso Grande
+ *              description: Usado para hacer...
  *              price: 5500
  *              image: /vasogrande.png
  *              score: 10
@@ -42,6 +46,9 @@
  *                  type: string
  *                  description: nombre del producto
  *                  required: true
+ *              description:
+ *                  type: string
+ *                  description: descripción del producto
  *              price:
  *                  type: number
  *                  description: precio del producto
@@ -53,6 +60,7 @@
  *                  description: calificacion del producto
  *          example:
  *              name: Vaso Grande
+ *              description: Usado para hacer...
  *              price: 5500
  *              image: /vasogrande.png
  *              score: 10
