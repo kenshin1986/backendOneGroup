@@ -3,8 +3,7 @@ import bcrypt from 'bcrypt'
 
 export interface IUser extends Document {
     email: string;
-    password: string;
-    user: string;
+    password?: string;
     firstName: string;
     lastName: string;
     comparePassword: (password: string) => Promise<boolean>;
@@ -21,14 +20,6 @@ const userSchema = new Schema({
     password: {
         type: String,
         required: true,
-        select: false,
-    },
-    user: {
-        type: String,
-        unique: true,
-        required: true,
-        trim: true,
-        lowercase: true,
     },
     firstName: {},
     lastName: {}
@@ -40,8 +31,7 @@ const userSchema = new Schema({
 
 userSchema.pre<IUser>('save', async function (next) {
     const user = this;
-    if (!user.isModified('password')) return next();
-
+    if (!user.isModified('password') || !user.password) return next();
     const salt = await bcrypt.genSalt(10)
     const hash = await bcrypt.hash(user.password, salt);
     user.password = hash;

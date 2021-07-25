@@ -38,6 +38,7 @@ export const signUp = async (req: any, res: Response, next: NextFunction) => {
             if (!userSelect) {
                 const newUser = new UserModel(req.body)
                 const response: any = await newUser.save()
+                delete response._doc.password
                 req.typeResponse = 200
                 req.json = {
                     currentUser: response._doc,
@@ -60,13 +61,13 @@ export const signUp = async (req: any, res: Response, next: NextFunction) => {
 }
 
 export const signIn = async (req: any, res: Response, next: NextFunction) => {
-    console.log("que paso way");
     const { email, password } = req.body
     try {
         if (email && password) {
             const userSelect = await UserModel.findOne({ email })
             const isMatch = await userSelect?.comparePassword(password)
             if (userSelect && isMatch) {
+                delete userSelect.password
                 req.typeResponse = 200
                 req.json = {
                     currentUser: userSelect,
@@ -81,6 +82,8 @@ export const signIn = async (req: any, res: Response, next: NextFunction) => {
             req.message = "Los parámetros user y password son obligatorios"
         }
     } catch (error) {
+        console.log(error);
+
         req.typeResponse = 500
         req.error = error
     }

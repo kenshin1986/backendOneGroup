@@ -14,9 +14,6 @@
  *              _id:
  *                  type: string
  *                  description: Identificador del usuario
- *              user:
- *                  type: string
- *                  description: usuario
  *              email:
  *                  type: string
  *                  description: correo del usuario
@@ -34,7 +31,6 @@
  *                  description: fecha de actualización
  *          example:
  *              id: fsadf541561adf841wfd5s1
- *              user: Bret
  *              email: Sincere@april.biz
  *              firstName: Juanito
  *              lastName: Perez
@@ -43,10 +39,6 @@
  *      UserCreate:
  *          type: object
  *          properties:
- *              user:
- *                  type: string
- *                  description: usuario
- *                  required: true
  *              email:
  *                  type: string
  *                  required: true
@@ -62,7 +54,6 @@
  *                  type: string
  *                  description: apellidos del usuario
  *          example:
- *              user: Bret
  *              email: Sincere@april.biz
  *              password: 51586fs61fs
  *              firstName: Juanito
