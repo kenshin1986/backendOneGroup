@@ -41,4 +41,4 @@ npm start
 ## Autores ✒️
 
 
-**Manuel Yivan Rodriguez Carreño** - *Trabajo Inicial* 
+**Manuel Yivan Rodriguez Carreño** 
