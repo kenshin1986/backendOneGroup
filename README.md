@@ -41,4 +41,4 @@ npm start
 ## Autores ✒️
 
 
-**Manuel Yivan Rodriguez Carreño** - *Trabajo Inicial* - [darklegion92](https://github.com/darklegion92)
+**Manuel Yivan Rodriguez Carreño** - *Trabajo Inicial* 
