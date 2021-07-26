@@ -24,11 +24,11 @@ npm run dev
 ## Ejecutando las pruebas ⚙️
 
 ## Servidor de pruebas
-https://app-group-prueba.vercel.app/ 
+https://apirestonegroup.herokuapp.com
 
 ## Documentación 📋
 
-Ingresar al enlace https://apirestonegroup.herokuapp.com/doc/#/
+Ingresar al enlace https://apirestonegroup.herokuapp.com/doc
 
 ## Despliegue 📦
 
