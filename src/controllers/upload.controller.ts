@@ -15,7 +15,7 @@ export const uploadImage = async (req: any, res: Response, next: NextFunction) =
         if (file) {
             req.typeResponse = 200
             req.json = {
-                path: file.filename.trim(),
+                path: file.filename,
                 originalname: file.originalname,
                 size: file.size,
             }

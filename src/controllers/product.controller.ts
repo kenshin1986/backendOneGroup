@@ -84,9 +84,10 @@ export const getProductId = async (req: any, res: Response, next: NextFunction) 
 
 export const patchProduct = async (req: any, res: Response, next: NextFunction) => {
     const { id } = req.params
+
     try {
         if (id) {
-            await ProductModel.updateOne(id, req.body)
+            await ProductModel.findByIdAndUpdateOne(id, req.body)
             req.typeResponse = 200
             req.message = 'Producto actualizado correctamente'
         } else {
