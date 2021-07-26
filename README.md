@@ -28,7 +28,7 @@ https://app-group-prueba.vercel.app/
 
 ## Documentación 📋
 
-Ingresar al enlace http://localhost:3001/doc
+Ingresar al enlace https://apirestonegroup.herokuapp.com/doc/#/
 
 ## Despliegue 📦
 
