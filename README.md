@@ -4,7 +4,7 @@ Proyecto básico de api rest
 
 ## Comenzando 🚀
 
-git clone https://github.com/Darklegion92/digitalsoluciones
+git clone https://github.com/kenshin1986/backendOneGroup.git
 
 Mira **Deployment** para conocer como desplegar el proyecto.
 
@@ -14,7 +14,7 @@ Mira **Deployment** para conocer como desplegar el proyecto.
 Tener instalado mongoDB o puedes descargarlo desde el siguiente enlace https://fastdl.mongodb.org/windows/mongodb-windows-x86_64-5.0.0-signed.msi
 ### Instalación 🔧
 
-En la raiz del directorio creado al clonar ejecutar lo sigueinte
+En la raiz del directorio creado al clonar ejecutar lo siguiente
 
 npm i
 ó
