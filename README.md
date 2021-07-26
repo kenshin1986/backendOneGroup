@@ -1,6 +1,6 @@
 # API REST DIGITAL
 
-Proyecto básico de api rest
+Proyecto básico de api rest con un crud completo para usuario, productos y jwt para el manejo de la sesion
 
 ## Comenzando 🚀
 
