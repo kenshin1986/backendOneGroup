@@ -23,7 +23,8 @@ npm install
 npm run dev
 ## Ejecutando las pruebas ⚙️
 
-
+## Servidor de pruebas
+https://app-group-prueba.vercel.app/ 
 
 ## Documentación 📋
 
