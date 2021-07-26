@@ -16,7 +16,7 @@ export const saveLogs = async (req: any, res: Response) => {
     }
     const newLog = new LogModel(dataLog)
     try {
-        //await newLog.save();
+        await newLog.save();
         res.status(typeResponse).send(response)
     } catch (error) {
         res.status(500).send({ error })
