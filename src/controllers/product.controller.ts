@@ -13,7 +13,7 @@ export const getProducts = async (req: any, res: Response, next: NextFunction) =
     const limit = parseInt($limit) || 10
     const skip = parseInt($skip) || 0
     try {
-        const products = await ProductModel.find({ name: { $regex: `.*${name||''}.*` } }).limit(limit).skip(skip);
+        const products = await ProductModel.find({ name: { $regex: `.*${name}.*` } }).limit(limit).skip(skip);
 
         req.typeResponse = 200
         req.json = {
@@ -105,7 +105,7 @@ export const deleteProduct = async (req: any, res: Response, next: NextFunction)
     const { id } = req.params
     try {
         if (id) {
-            await ProductModel.deleteOne(id)
+            await ProductModel.findByIdAndDelete(id)
             req.typeResponse = 200
             req.message = 'Producto eliminado correctamente'
         } else {
