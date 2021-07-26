@@ -106,8 +106,14 @@ export const deleteProduct = async (req: any, res: Response, next: NextFunction)
     try {
         if (id) {
             await ProductModel.findByIdAndDelete(id)
-            req.typeResponse = 200
-            req.message = 'Producto eliminado correctamente'
+            const products = await ProductModel.find().limit(10).skip(0);
+                req.typeResponse = 200
+                req.json = {
+                    limit: 10,
+                    skip: 0,
+                    total: (await ProductModel.find()).length,
+                    data: products,
+                }
         } else {
             req.typeResponse = 400
             req.message = "El parámetro id es obligatorio"

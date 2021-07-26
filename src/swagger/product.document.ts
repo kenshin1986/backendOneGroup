@@ -290,11 +290,19 @@
  *                      schema:
  *                          type: object
  *                          properties:
- *                              message:
- *                                  type: string
- *                                  description: mensaje para mostar al usuario
- *                          example:
- *                              message: Producto eliminado correctamente
+ *                              total:
+ *                                  type: number
+ *                                  example: 1
+ *                              limit:
+ *                                  type: number
+ *                                  example: 10
+ *                              skip:
+ *                                  type: number
+ *                                  example: 0
+ *                              data:
+ *                                  type: array
+ *                                  items:
+ *                                      $ref: '#/components/schemas/ProductSelect'
  *          400:
  *              description: Producto no encontrado
  *              content:
