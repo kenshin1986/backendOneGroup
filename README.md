@@ -27,7 +27,7 @@ npm run dev
 
 ## Documentación 📋
 
-Ingresar al enlace http://localhost:3001/docs
+Ingresar al enlace http://localhost:3001/doc
 
 ## Despliegue 📦
 
